@@ -1,0 +1,49 @@
+.tweet-container {
+  border: 5px solid;
+  height: 200px;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.tweet-container:hover {
+  box-shadow: 0.3rem 0.3rem grey;
+}
+
+.tweet-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.tweet-footer {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 5px solid;
+  align-self: center;
+  font-size: 16px;
+  padding: 5px;
+
+}
+
+#flag {
+  color: #4056A1;
+}
+#retweet {
+  color: #4056A1;
+}
+#heart {
+  color: #4056A1;
+}
+#flag:hover {
+  color: goldenrod;
+}
+#retweet:hover {
+  color: goldenrod;
+}
+#heart:hover {
+  color: goldenrod;
+}
