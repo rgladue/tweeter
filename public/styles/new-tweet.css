@@ -1,0 +1,29 @@
+.new-tweet {
+  width: 100%;
+}
+
+#tweet-btn {
+  background-color: #4056A1;
+  font-family: 'Bungee', sans-serif;
+  color: white;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  
+}
+#tweet-text {
+  font-family:'Source Sans Pro', sans-serif;
+  border-bottom: 5px solid rgb(80, 80, 80); 
+  background: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  height: 40px;
+}
+#tweet-btn-box {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Bungee', sans-serif;
+  margin-top: 10px;
+}
