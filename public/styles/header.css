@@ -1,11 +1,12 @@
 header {
-  height: 400px;
+  height: 500px;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   background-color: khaki;
   background-image: url(../images/argyle.png);
+  padding-top: 120px;
 }
 .div-1 {
   display: flex;
