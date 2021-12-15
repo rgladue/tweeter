@@ -5,11 +5,12 @@
  */
 $(document).ready(function() {
 
-
+  
+  
   const getTweets = () => {
-
+    
     $.ajax({
-
+      
       url: '/tweets',
       method: 'GET',
       dataType: 'json',
@@ -21,13 +22,19 @@ $(document).ready(function() {
       }
     });
   };
-
+  
   getTweets();
-
-
-
+  
+  
+  
   
   const createTweetElement = function (tweetObj) {
+    
+    const escape = function (str) {
+      let div = document.createElement("div");
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    };
     
     const user = tweetObj.user.name
     const pic = tweetObj.user.avatars;
@@ -43,7 +50,7 @@ $(document).ready(function() {
     </div>
     <div class="handle">${handle}</div>
     </div>
-    <div class="tweet-content">${tweet}</div>
+    <div class="tweet-content">${escape(tweet)}</div>
     <footer class="tweet-footer">
     <div class="time">${time}</div>
     <div><i class="fa-solid fa-flag" id="flag"></i> <i class="fa-solid fa-retweet" id="retweet"></i> <i class="fa-solid fa-heart" id="heart"></i></div>
@@ -65,8 +72,6 @@ $(document).ready(function() {
     }
   }
 
-  
-
 
   const $form = $('#tweet-form');
 
@@ -74,19 +79,30 @@ $(document).ready(function() {
     const text = $('textarea').val();
     if (text.length === 0) {
       event.preventDefault();
-      return alert('Input field is empty!!');
+      $('.empty-field').slideDown(1000);
+      $('.empty-field').text('Error: Input field is empty!')
+      $('.empty-field').css('color', 'red');
+      $('.empty-field').css('border', '5px solid red');
+      return;
     }
     else if(text.length > 140) {
       event.preventDefault();
-      return alert('Tweet has too many characters!!');
+      $('.too-much-chars').slideDown(1000);
+      $('.too-much-chars').text('Error: Too many characters! (maximum length 140 characters)');
+      $('.too-much-chars').css('color', 'red');
+      $('.too-much-chars').css('border', '5px solid red');
+      return;
     } else {
       event.preventDefault();
+      $('.too-much-chars').slideUp();
+      $('.empty-field').slideUp();
       const serializedData = $(this).serialize();
   
       console.log("*********",serializedData);
   
       $.post('/tweets', serializedData, (response) => {
         getTweets()
+        field.val('');
   
       })
     }
