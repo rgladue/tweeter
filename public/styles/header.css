@@ -7,6 +7,7 @@ header {
   background-color: khaki;
   background-image: url(../images/argyle.png);
   padding-top: 120px;
+  color: charcoal;
 }
 .div-1 {
   display: flex;

@@ -6,30 +6,26 @@
 $(document).ready(function() {
 
 
-  const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png"
-        ,
-        "handle": "@SirIsaac"
+  const getTweets = () => {
+
+    $.ajax({
+
+      url: '/tweets',
+      method: 'GET',
+      dataType: 'json',
+      success: function (tweets) {
+        renderTweets(tweets);
       },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    }
-  ]
+      error: function (err) {
+        console.log("Error: ", err)
+      }
+    });
+  };
+
+  getTweets();
+
+
+
   
   const createTweetElement = function (tweetObj) {
     
@@ -42,7 +38,7 @@ $(document).ready(function() {
     const $tweet = $(`<article class="tweet">
     <div class="tweet-header">
     <div class="tweet-front">
-    <div class="pic">${pic}</div>
+    <img src="${pic}">
     <div class="user">${user}</div>
     </div>
     <div class="handle">${handle}</div>
@@ -59,33 +55,48 @@ $(document).ready(function() {
     
     
   };
-  // const tweetData = {
-  //   "user": {
-  //     "name": "Newton",
-  //     "avatars": "https://i.imgur.com/73hZDYK.png",
-  //       "handle": "@SirIsaac"
-  //     },
-  //   "content": {
-  //       "text": "If I have seen further it is by standing on the shoulders of giants"
-  //     },
-  //   "created_at": 1461116232227
-  // }
+ 
 
   const renderTweets = function (arr) {
-    for (let i = 0; i < arr.length; i++) {
-      $("#tweets-container").append(createTweetElement(arr[i]));
+    const $tweetContainer = $('#tweets-container');
+    $tweetContainer.empty();
+    for (const key of arr) {
+      $tweetContainer.prepend(createTweetElement(key));
     }
   }
 
-  renderTweets(data);
+  
 
-//   // Test / driver code (temporary). Eventually will get this from the server.
 
-// const $tweet = createTweetElement(tweetData);
+  const $form = $('#tweet-form');
 
-// // // Test / driver code (temporary)
-// // console.log($tweet); // to see what it looks like
-// $('#tweets-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+  $form.on("submit", function(event) {
+    const text = $('textarea').val();
+    if (text.length === 0) {
+      event.preventDefault();
+      return alert('Input field is empty!!');
+    }
+    else if(text.length > 140) {
+      event.preventDefault();
+      return alert('Tweet has too many characters!!');
+    } else {
+      event.preventDefault();
+      const serializedData = $(this).serialize();
+  
+      console.log("*********",serializedData);
+  
+      $.post('/tweets', serializedData, (response) => {
+        getTweets()
+  
+      })
+    }
+
+
+  })
+    
+
+
+
 
 
 })
