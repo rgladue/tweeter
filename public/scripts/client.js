@@ -3,45 +3,36 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-$(document).ready(function() {
-
-  
-  
+$(document).ready(function () {
   const getTweets = () => {
-    
     $.ajax({
-      
-      url: '/tweets',
-      method: 'GET',
-      dataType: 'json',
+      url: "/tweets",
+      method: "GET",
+      dataType: "json",
       success: function (tweets) {
         renderTweets(tweets);
       },
       error: function (err) {
-        console.log("Error: ", err)
-      }
+        console.log("Error: ", err);
+      },
     });
   };
-  
+
   getTweets();
-  
-  
-  
-  
+
   const createTweetElement = function (tweetObj) {
-    
     const escape = function (str) {
       let div = document.createElement("div");
       div.appendChild(document.createTextNode(str));
       return div.innerHTML;
     };
-    
-    const user = tweetObj.user.name
+
+    const user = tweetObj.user.name;
     const pic = tweetObj.user.avatars;
     const handle = tweetObj.user.handle;
     const tweet = tweetObj.content.text;
     const time = timeago.format(tweetObj.created_at);
-    
+
     const $tweet = $(`<article class="tweet">
     <div class="tweet-header">
     <div class="tweet-front">
@@ -57,67 +48,55 @@ $(document).ready(function() {
     </footer>
     </article>
     `);
-    
+
     return $tweet;
-    
-    
   };
- 
 
   const renderTweets = function (arr) {
-    const $tweetContainer = $('#tweets-container');
+    const $tweetContainer = $("#tweets-container");
     $tweetContainer.empty();
     for (const key of arr) {
       $tweetContainer.prepend(createTweetElement(key));
     }
-  }
+  };
 
+  const $form = $("#tweet-form");
 
-  const $form = $('#tweet-form');
-
-  $form.on("submit", function(event) {
-    const text = $('textarea').val();
+  $form.on("submit", function (event) {
+    const text = $("textarea").val();
     if (text.length === 0) {
       event.preventDefault();
-      $('.empty-field').slideDown(1000);
-      $('.empty-field').text('Error: Input field is empty!')
-      $('.empty-field').css('color', 'red');
-      $('.empty-field').css('border', '5px solid red');
+      $(".empty-field").slideDown(1000);
+      $(".empty-field").text("Error: Input field is empty!");
+      $(".empty-field").css("color", "red");
+      $(".empty-field").css("border", "5px solid red");
       return;
-    }
-    else if(text.length > 140) {
+    } else if (text.length > 140) {
       event.preventDefault();
-      $('.too-much-chars').slideDown(1000);
-      $('.too-much-chars').text('Error: Too many characters! (maximum length 140 characters)');
-      $('.too-much-chars').css('color', 'red');
-      $('.too-much-chars').css('border', '5px solid red');
+      $(".too-much-chars").slideDown(1000);
+      $(".too-much-chars").text(
+        "Error: Too many characters! (maximum length 140 characters)"
+      );
+      $(".too-much-chars").css("color", "red");
+      $(".too-much-chars").css("border", "5px solid red");
       return;
     } else {
       event.preventDefault();
-      $('.too-much-chars').slideUp();
-      $('.empty-field').slideUp();
-      const serializedData = $(this).serialize();
-  
-      console.log("*********",serializedData);
-  
-      $.post('/tweets', serializedData, (response) => {
-        getTweets()
-        field.val('');
-  
-      })
-    }
+      $(".too-much-chars").slideUp();
+      $(".empty-field").slideUp();
+      const encodedData = $(this).serialize();
 
+      $.post("/tweets", encodedData, (response) => {
+        getTweets();
+        $("textarea").val("");
+        $('.counter').val(140);
+      });
+    }
+  });
+
+  $('#arrow').on('click', () => {
+    $('textarea').focus();    
 
   })
-    
 
-
-
-
-
-})
-
-  
-
-
-
+});

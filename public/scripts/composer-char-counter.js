@@ -1,26 +1,18 @@
-$(document).ready(function() {
-  
+$(document).ready(function () {
+  $("#tweet-text").on("input", function () {
+    let field = $("textarea");
 
+    $(".counter").val(140 - field.val().length);
+    $(".counter").css("color", "charcoal");
 
-  $("#tweet-text").on("input", function() {
-    
-   let field = $("textarea");
+    if (field.val().length >= 1) {
+      $("empty-field").slideDown(1000);
+    }
 
-
-   $(".counter").val(140 - field.val().length);
-   $(".counter").css('color', 'charcoal');
-
-   if (field.val().length >= 1) {
-     $('empty-field').slideDown(1000);
-   }
-
-   if ($(".counter").val() <= 0) {
-    $(".counter").css('color', 'red');
-   } else if ($(".counter").val() > 0) {
-     $(".counter").css('color', 'charcoal');
-   }
-  
+    if ($(".counter").val() <= 0) {
+      $(".counter").css("color", "red");
+    } else if ($(".counter").val() > 0) {
+      $(".counter").css("color", "charcoal");
+    }
+  });
 });
-});
-
-
