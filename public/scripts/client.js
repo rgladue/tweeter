@@ -69,16 +69,16 @@ $(document).ready(function () {
       $(".empty-field").slideDown(1000);
       $(".empty-field").text("Error: Input field is empty!");
       $(".empty-field").css("color", "red");
-      $(".empty-field").css("border", "5px solid red");
+      $(".empty-field").css("border", "1px solid red");
+      $(".empty-field").css("background-color", "#f9d0d7");
       return;
     } else if (text.length > 140) {
       event.preventDefault();
       $(".too-much-chars").slideDown(1000);
-      $(".too-much-chars").text(
-        "Error: Too many characters! (maximum length 140 characters)"
-      );
+      $(".too-much-chars").text("Error: Too many characters! (maximum length 140 characters)");
       $(".too-much-chars").css("color", "red");
-      $(".too-much-chars").css("border", "5px solid red");
+      $(".too-much-chars").css("border", "1px solid red");
+      $(".too-much-chars").css("background-color", "#f9d0d7");
       return;
     } else {
       event.preventDefault();
