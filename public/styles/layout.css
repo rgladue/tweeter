@@ -15,8 +15,8 @@ html {
  */
 
 body {
-  color: #545149;
-  background-color: #f4f1ec;
+  color: white;
+  background-color: #2d2c2b;
   font-size: 24px;
   font-family: "Source Sans Pro", sans-serif;
   display: flex;
@@ -29,7 +29,7 @@ body {
  */
  .container {
    width: 90%;
-   background-color: #f4f1ec;
+   background-color: #2d2c2b;
    display: flex;
    flex-direction: column;
   justify-content: center;
@@ -37,7 +37,7 @@ body {
  }
  
  
- @media only screen and (min-width: 1024px) {
+ @media only screen and (min-width: 1300px) {
   body {
     display: flex;
     flex-direction: row;
@@ -49,13 +49,15 @@ body {
     align-self: flex-start;
     margin-top: 260px;
     max-width: 500px;
-    margin-left: 50px;
+    min-width: 500px;
+    margin-left: 10px;
     border-radius: 50%;
   }
   .container {
     margin-top: 120px;
     padding: 50px;
     max-width: 800px;
+    min-width: none;
   }
   
 }

@@ -11,7 +11,7 @@
 }
 
 .tweet:hover {
-  box-shadow: 0.3rem 0.3rem grey;
+  box-shadow: 0.3rem 0.3rem rgb(99, 95, 95);
 }
 
 .tweet-header {
@@ -37,13 +37,13 @@
 }
 
 #flag {
-  color: #4056A1;
+  color: #9005ac;
 }
 #retweet {
-  color: #4056A1;
+  color: #9005ac;
 }
 #heart {
-  color: #4056A1;
+  color: #9005ac;
 }
 #flag:hover {
   color: goldenrod;

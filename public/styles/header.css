@@ -4,7 +4,7 @@ header {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: khaki;
+  background-color: #7a0691;
   background-image: url(../images/argyle.png);
   padding-top: 120px;
   color: charcoal;
